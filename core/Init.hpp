@@ -1,13 +1,14 @@
 #pragma once
 
 /**
- * Данный класс отвечает за настройку OpenGL
+ * Init OpenGL
  */
 class Init
 {
 public:
 	/**
-	 * Данный класс инициализирует OpenGL
+	 * Setup Open GL
+	 * Set major and minor version
 	 */
 	static void init(int major, int minor);
 };
