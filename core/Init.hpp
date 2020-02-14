@@ -2,15 +2,20 @@
 
 #include "OpenGL.hpp"
 
-/**
- * Init OpenGL
- */
-class Init
+namespace GL
 {
-public:
 	/**
-	 * Setup Open GL
-	 * Set major and minor version
+	 * Init OpenGL
 	 */
-	static void init(int major, int minor);
-};
+	class Init
+	{
+	public:
+		/**
+		 * Setup Open GL
+		 * Set major and minor version
+		 */
+		static void init(int major, int minor);
+
+		static void free();
+	};
+}
