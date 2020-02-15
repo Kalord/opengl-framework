@@ -1,21 +1,41 @@
 #include "Shape.hpp"
 
-Shape::Shape(std::vector<GLfloat> vertexs, std::vector<GLfloat> colors) :
-vertexs(new GLfloat[vertexs.size()]), colors(new GLfloat[colors.size()])
+GL::Shape::Shape(std::vector<GLfloat> vertexs, std::vector<GLfloat> colors) :
+vertexs(new GLfloat[vertexs.size() + colors.size()])
 {
-	for (int i = 0; i < vertexs.size(); i++) this->vertexs[i] = vertexs[i];
-	for (int i = 0; i < colors.size(); i++) this->colors[i] = colors[i];
-	
-	this->bindAttributes();
+	this->loadVertexs(vertexs, colors);
+	//this->bindAttributes();
 }
 
-Shape::~Shape()
+GL::Shape::~Shape()
 {
 	delete this->vertexs;
-	delete this->colors;
 }
 
-void Shape::bindAttributes()
+void GL::Shape::loadVertexs(std::vector<GLfloat> vertexs, std::vector<GLfloat> colors)
+{
+	int i = 0;
+	while (i < vertexs.size())
+	{
+		this->vertexs[i] = vertexs[i];
+		i++;
+	}
+	this->setNumberVertexs(vertexs.size() / 3);
+
+	if (colors.size())
+	{
+		int j = 0;
+		while (j < colors.size())
+		{
+			this->vertexs[i];
+			i++;
+			j++;
+		}
+		this->color = true;
+	}
+}
+
+void GL::Shape::bindAttributes()
 {
 	glGenVertexArrays(1, &this->attrsList);
 	glGenBuffers(1, &this->VBO);
@@ -23,4 +43,30 @@ void Shape::bindAttributes()
 	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
 
 	glBufferData(GL_ARRAY_BUFFER, sizeof(this->vertexs), this->vertexs, GL_DYNAMIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+}
+
+bool GL::Shape::hasColor()
+{
+	return this->color;
+}
+
+GLint GL::Shape::getNumberVertexs()
+{
+	return this->numberVertexs;
+}
+
+void GL::Shape::setNumberVertexs(GLint value)
+{
+	this->numberVertexs = value;
+}
+
+GLuint GL::Shape::getAttrsList()
+{
+	return this->attrsList;
 }
