@@ -6,6 +6,11 @@
 
 #include "OpenGL.hpp"
 
+#define RED 0
+#define GREEN 1
+#define BLUE 2
+#define OPACITY 3
+
 namespace GL
 {
 	/**
@@ -24,6 +29,7 @@ namespace GL
 	private:
 		GLFWwindow* window;
 		std::vector<int> draws;
+		std::vector<GLfloat> RGBA;
 	public:
 		Window(uint32_t width, uint32_t height, const std::string& title);
 		bool isOpen();
@@ -33,5 +39,8 @@ namespace GL
 		 * This method draw objects from property draws
 		 */
 		void display();
+
+		void setBackgroundColor(GLfloat R, GLfloat G, GLfloat B, GLfloat A);
+		bool issetBackgroundColor();
 	};
 }
