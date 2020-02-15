@@ -38,3 +38,10 @@ bool GL::Window::issetBackgroundColor()
 {
 	return this->RGBA.size() == 4;
 }
+
+void GL::Window::draw(Drawable* drawable)
+{
+	glBindVertexArray(drawable->getAttrsList());
+	glDrawArrays(GL_TRIANGLES, 0, drawable->getNumberVertexs());
+	glBindVertexArray(0);
+}

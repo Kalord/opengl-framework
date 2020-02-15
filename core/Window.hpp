@@ -5,6 +5,7 @@
 #include <sys/types.h>
 
 #include "OpenGL.hpp"
+#include "Drawable.hpp"
 
 #define RED 0
 #define GREEN 1
@@ -42,5 +43,7 @@ namespace GL
 
 		void setBackgroundColor(GLfloat R, GLfloat G, GLfloat B, GLfloat A);
 		bool issetBackgroundColor();
+
+		void draw(Drawable* drawable);
 	};
 }
